@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <conio.h>
+#include <windows.h>
 using namespace std;
 
 class book
@@ -9,6 +10,10 @@ private:
     string book_name, auther, publisher;
     float price;
     int stock, book_id;
+    string banner = "banner.txt";
+    string Developer = "Developer.txt";
+    string welcome = "Art.txt";
+    string Thanyou = "thankyou.txt";
 
 public:
     void input();
@@ -18,7 +23,28 @@ public:
     string retpublisher();
     float retprice();
     int retid();
+
+    void art(int, int, string); // type, speed , filename
 };
+void book::art(int type, int speed, string name)
+{
+    string filename(name);
+    unsigned char character = 0;
+    FILE *inputFile = fopen(filename.c_str(), "r");
+
+    while (!feof(inputFile))
+    {
+        character = getc(inputFile);
+        if (type == 99)
+            Sleep(speed);
+        else
+            Sleep(speed);
+
+        cout << character << "";
+    }
+    cout << endl;
+    fclose(inputFile);
+}
 
 string book::retauther()
 {
@@ -84,7 +110,10 @@ void book::display()
 }
 
 class function
-{
+{   
+    private:
+    string Developer = "Developer.txt";
+    string Thankyou = "thankyou.txt";
 public:
     void wrt();
     void red();
@@ -293,7 +322,7 @@ void function::update()
 {
     fstream file;
     book stu;
-    int id,n=0;
+    int id, n = 0;
     char ch;
     file.open("database.txt", ios::in | ios::out);
     if (file.is_open())
@@ -339,70 +368,87 @@ void function::update()
         getch();
     }
 }
-    void function ::menu()
-    {
-        int ch;
+void function ::menu()
+{   book bok;
+    int ch;
 
-        do
+    do
+    {
+        system("cls");
+        cout << endl
+             << "\t\t<---------------------------------------------------->";
+        cout << endl
+             << "\t\t <---------- 1 . Input -------->";
+        //            cout << endl
+        //                 << "\t\t <---------- 2 . Update -------->";
+        //            cout << endl
+        //                 << "\t\t <---------- 3 . Search -------->";
+        cout << endl
+             << "\t\t <---------- 4 . Display -------->";
+        cout << endl
+             << "\t\t <---------- 5 . Destory -------->";
+        cout << endl
+             << "\t\t <---------- 10 . About Developers -------->";
+        cout << endl
+             << "\t\t <---------- 99. Exit -------->";
+        cout << endl
+             << "\t\t<----------------------------------------------------> ";
+        cin >> ch;
+
+        switch (ch)
         {
+        case 1:
+            wrt();
+            break;
+
+        case 2:
+            //    update();
+            break;
+
+        case 3:
+            search();
+            break;
+        case 4:
+            red();
+            getch();
+            break;
+        case 5:
+            destory();
+            getch();
+            break;
+        case 99:
             system("cls");
+            bok.art(99,1,Thankyou);
+            system("exit");
+            break;
+        case 10:
+            system("cls");
+            bok.art(99,2,Developer);
+            getch();
+            break;
+        default:
             cout << endl
-                 << "\t\t<---------------------------------------------------->";
-            cout << endl
-                 << "\t\t <---------- 1 . Input -------->";
-//            cout << endl
-//                 << "\t\t <---------- 2 . Update -------->";
-//            cout << endl
-//                 << "\t\t <---------- 3 . Search -------->";
-            cout << endl
-                 << "\t\t <---------- 4 . Display -------->";
-           cout << endl
-                << "\t\t <---------- 5 . Destory -------->";
-            cout << endl
-                 << "\t\t <---------- 99. Exit -------->";
-            cout << endl
-                 << "\t\t<----------------------------------------------------> ";
-            cin >> ch;
+                 << "\t\t <------ INVALID OPTIONS --------> ";
+            break;
+        }
 
-            switch (ch)
-            {
-            case 1:
-                wrt();
-                break;
+    } while (ch != 99);
+}
 
-            case 2:
-                //    update();
-                break;
+int main()
+{
 
-            case 3:
-                search();
-                break;
-            case 4:
-                red();
-                getch();
-                break;
-            case 5:
-                destory();
-                getch();
-                break;
-            case 99:
-                cout << endl
-                     << "\t\t <------ Thanks for using our program ------>";
-                system("exit");
-                break;
-            default:
-                cout << endl
-                     << "\t\t <------ INVALID OPTIONS --------> ";
-                break;
-            }
-
-        } while (ch != 99);
-    }
-
-    int main()
-    {
-
-        function fun;
-        fun.menu();
-        return 0;
-    }
+    function fun;
+    book bok;
+    string Developer = "Developer.txt";
+    string welcome = "Art.txt";
+    system("color 2f");
+    system("cls");
+    bok.art(99, 2, welcome);
+    Sleep(1000);
+    bok.art(1,0,Developer);
+    getch();
+    
+    fun.menu();
+    return 0;
+}

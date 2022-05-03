@@ -1,6 +1,8 @@
 #include <iostream>
 #include <conio.h>
+#include <windows.h>
 using namespace std;
+
 class convertor
 {
 private:
@@ -8,13 +10,36 @@ private:
     int new_years, new_month, new_day;
     //    string Nepali[11];
     //    string English[11];
+   
+
 public:
     void menu();
     void input();
     void Bs_To_Ad();
     void Ad_TO_BS();
+    void art(int, int, string); // type , speed ,filename
 };
 
+void convertor::art(int type, int speed, string name)
+{
+    string filename(name);
+
+    FILE *input_file = fopen(filename.c_str(), "r");
+    unsigned char character;
+    while (!feof(input_file))
+    {
+        character = getc(input_file);
+
+        if (type == 99)
+            Sleep(speed);
+        else
+            Sleep(0);
+
+        cout << character << "";
+    }
+    cout << endl;
+    fclose(input_file);
+}
 void convertor::input()
 {
 
@@ -26,7 +51,8 @@ void convertor::input()
     cin >> month;
     cin.ignore(1, '/');
     cin >> day;
-    if(month>12 || day>31){
+    if (month > 12 || day > 31)
+    {
         system("cls");
         input();
     }
@@ -71,13 +97,13 @@ void convertor::Bs_To_Ad()
     cout << endl
          << "\t\t In Bs -----> " << new_years << "/" << new_month << "/" << new_day;
     cout << endl
-         << "\t\t In BS -----> " << new_years << "/" << Nepali[new_month-1] << "/" << new_day;
-         
+         << "\t\t In BS -----> " << new_years << "/" << Nepali[new_month - 1] << "/" << new_day;
+
     cout << endl
          << endl
          << "\t\t In Ad -----> " << years << "/" << month << "/" << day;
     cout << endl
-         << "\t\t In AD -----> " << years << "/" << English[month-1] << "/" << day;
+         << "\t\t In AD -----> " << years << "/" << English[month - 1] << "/" << day;
 }
 
 void convertor::Ad_TO_BS()
@@ -185,25 +211,27 @@ void convertor::Ad_TO_BS()
         month -= 15;
     }
     years += 56;
-    
-    
+
     cout << endl
          << "\t\t In AD -----> " << new_years << "/" << new_month << "/" << new_day;
     cout << endl
-         << "\t\t In Bs -----> " << new_years << "/" << English[new_month-1] << "/" << new_day;
+         << "\t\t In Bs -----> " << new_years << "/" << English[new_month - 1] << "/" << new_day;
 
     cout << endl
          << endl
          << endl
          << "\t\t In BS -----> " << years << "/" << month << "/" << day;
     cout << endl
-         << "\t\t In Bs -----> " << years << "/" << Nepali[month-1] << "/" << day;
+         << "\t\t In Bs -----> " << years << "/" << Nepali[month - 1] << "/" << day;
 }
 
 void convertor::menu()
 {
     int choice, num;
-
+     string banner = "art/banner.txt";
+    string Developer = "art/Developer.txt";
+    string welcome = "art/Art.txt";
+    string Thankyou = "art/thankyou.txt";
     do
     {
         system("cls");
@@ -220,28 +248,25 @@ void convertor::menu()
              << "\t\t<--------- 99 ) Exit ---------->" << endl;
         cout << "\t ________________________________________________";
         cin >> choice;
+        system("cls");
+        art(1, 0, banner);
+        Sleep(100);
         switch (choice)
         {
         case 1:
-            system("cls");
+
             Bs_To_Ad();
             getch();
             break;
-        case 2:
-            system("cls");
+        case 2:;
             Ad_TO_BS();
             getch();
             break;
 
         case 99:
-            cout << endl
-                 << endl
-                 << endl
-                 << "\t ________________________________________________";
-            cout << endl
-                 << "\t\t Thanks for using our program ";
-            cout << endl
-                 << "\t ________________________________________________";
+             system("cls");
+            art(99,1,Thankyou);
+            
             break;
         default:
             cout << endl
@@ -255,6 +280,20 @@ void convertor::menu()
 int main()
 {
     convertor con;
+    
+    string Developer = "art/Developer.txt";
+    string welcome = "art/Art.txt";
+    
+    system("cls");
+    system("color 2f");
+
+    con.art(99, 2, welcome);
+    Sleep(1000);
+
+    system("cls");
+    con.art(1, 0, Developer);
+    getch();
+
     con.menu();
 
     return 0;

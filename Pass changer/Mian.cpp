@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <cstring>
 #include <conio.h>
+#include <windows.h>
 using namespace std;
 class sys
 {
@@ -22,21 +23,67 @@ public:
 	void pass_change();
 	void add_in_admin();
 	void remove_from_admin();
+	string banner = "art/banner.txt";
+	string admin = "art/admin.txt";
+	string thankyou = "art/thankyou.txt";
+
 };
 void menu();
+void intial();
+void art(int, int, string); // type,speed,filename
+void intial()
+{
+	string Developer = "art/Developer.txt";
+	string welcome = "art/Art.txt";
+
+	string thankyou = "art/thankyou.txt";
+
+	system("color 71");
+
+	system("cls");
+	art(99, 2, welcome);
+	Sleep(1000);
+
+	system("cls");
+	art(1, 0, Developer);
+	getch();
+}
+
+void art(int type, int speed, string name)
+{
+	string filename(name);
+
+	FILE *input_file = fopen(filename.c_str(), "r");
+	unsigned char character;
+	while (!feof(input_file))
+	{
+		character = getc(input_file);
+
+		if (type == 99)
+			Sleep(speed);
+		else
+			Sleep(0);
+
+		cout << character << "";
+	}
+	cout << endl;
+	fclose(input_file);
+}
+
 int main()
 {
 	sys sy;
+	intial();
 	sy.menu();
 }
 void sys::user_list()
 {
-	system("cls");
+	
 	system("net user");
 }
 void sys::new_user()
 {
-	system("cls");
+	
 	system("net user");
 	cout << endl
 		 << "\t\t Enter the username to add ";
@@ -66,7 +113,7 @@ void sys::new_user()
 }
 void sys::del_user()
 {
-	system("cls");
+	
 	system("net user");
 	cout << endl
 		 << "\t\t Enter the user name to delete ";
@@ -89,7 +136,7 @@ void sys::del_user()
 
 void sys::pass_change()
 {
-	system("cls");
+	
 	system("net user");
 	cout << endl
 		 << "\t\t Enter username to change the password";
@@ -113,7 +160,7 @@ void sys::pass_change()
 
 void sys::add_in_admin()
 {
-	system("cls");
+	
 	system("net user");
 	cout << endl
 		 << "\t\t Enter the user name to add in admin group ";
@@ -135,7 +182,7 @@ void sys::add_in_admin()
 
 void sys::remove_from_admin()
 {
-	system("cls");
+	
 	system("net user");
 	cout << endl
 		 << "\t\t Enter the user name to delete in admin group ";
@@ -187,42 +234,53 @@ void sys::menu()
 		switch (ch)
 		{
 		case 1: // user list
+
+			system("cls");
+			art(9, 0, banner);
 			user_list();
 			getch();
 			break;
 
 		case 2: // user change
+			system("cls");
+			art(9, 0, banner);
 			pass_change();
 			getch();
 
 			break;
 		case 3:
+		system("cls");
+			art(9,0,banner);
 			del_user();
 			getch();
 			break;
 
 		case 4: // add user
+		system("cls");
+			art(9,0,banner);
 			new_user();
 			getch();
 			break;
 		case 5:
+		system("cls");
+			art(9,0,banner);
 			add_in_admin();
 			getch();
 			break;
 		case 6:
+		system("cls");
+			art(9,0,banner);
 			remove_from_admin();
 			getch();
 			break;
 		case 99:
-			cout << endl
-				 << "\t\t<------ Thanks for using our program ------> ";
+			system("cls");
+			art(99,1,thankyou);
 			getch();
 			break;
 		case 100:
-			cout << endl
-				 << "\t\t<----- Please run this program in administrator mode for to do work sucessfully ------>";
-			cout << endl
-				 << endl;
+			system("cls");
+			art(99,2,admin);
 			getch();
 			break;
 

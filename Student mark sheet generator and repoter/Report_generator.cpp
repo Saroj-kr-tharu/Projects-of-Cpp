@@ -3,6 +3,8 @@
 #include <fstream>
 #include <cmath>
 #include <conio.h>
+#include <windows.h>
+
 using namespace std;
 
 class student
@@ -19,7 +21,29 @@ public:
     void calculate();
     int retClass();
     int retRollno();
+    void art(int, int, string);
 };
+
+void student ::art(int type, int speed, string name)
+{
+    string filename(name);
+
+    FILE *input_file = fopen(filename.c_str(), "r");
+    unsigned char character;
+    while (!feof(input_file))
+    {
+        character = getc(input_file);
+
+        if (type == 99)
+            Sleep(speed);
+        else
+            Sleep(0);
+
+        cout << character << "";
+    }
+    cout << endl;
+    fclose(input_file);
+}
 
 int student::retClass()
 {
@@ -144,51 +168,100 @@ void wrte();
 void modify();
 void del();
 void destory();
+void menu();
+void intial();
+void about();
 
 int main()
 {
+    intial();
+    menu();
+}
+
+void about()
+{
+    string Developer = "art/Developer.txt";
+    student stu;
+    system("cls");
+    stu.art(99, 1, Developer);
+    getch();
+}
+void menu()
+{
+
     int choice;
+    string Thankyou = "art/thankyou.txt";
+    string banner = "art/banner.txt";
+    string Developer = "art/Developer.txt";
+    student stu;
+
     do
     {
+
         system("cls");
+        stu.art(2, 1, banner);
+
         cout << endl
-             << "\t\t <------ 1 .  Input ------->";
+             << "\t\t <------ 1 .  Input            ------->";
         cout << endl
-             << "\t\t <------ 2 .  Display ------->";
+             << "\t\t <------ 2 .  Display          ------->";
         cout << endl
-             << "\t\t <------ 3 .  Modify ------->";
+             << "\t\t <------ 3 .  Modify           ------->";
         cout << endl
-             << "\t\t <------ 4 .  Delete ------->";
+             << "\t\t <------ 4 .  Delete           ------->";
         cout << endl
              << "\t\t <------ 5 .  Destory database -------> ";
         cout << endl
-             << "\t\t <------ 99.  Exit -------> \t";
+             << "\t\t <------ 10.  About            -------> ";
+        cout << endl
+             << "\t\t <------ 99.  Exit             -------> \t";
+        cout << endl
+             << "\t\t <------------------------------------------------------> ";
         cin >> choice;
 
         switch (choice)
         {
         case 1:
+            system("cls");
+            stu.art(2, 1, banner);
             wrte(); // inputing and writing
             break;
         case 2:
+            system("cls");
+            stu.art(2, 1, banner);
             red(); // reading and displaying
             break;
         case 3:
+            system("cls");
+            stu.art(2, 1, banner);
             modify();
             break;
         case 4:
+            system("cls");
+            stu.art(2, 1, banner);
             del();
             break;
         case 5:
+            system("cls");
+            stu.art(2, 1, banner);
             destory();
         //	getch();
+        case 10:
+            system("cls");
+            stu.art(2, 1, banner);
+            about();
+            break;
+        case 99:
+        system("cls");
+        stu.art(99, 1, Thankyou);
+        system("exit");
+        break;
         default:
             break;
         }
 
     } while (choice != 99);
 }
-
 void del()
 {
     bool found = false;
@@ -246,6 +319,24 @@ void del()
     file.close();
     newfile.close();
 }
+void intial()
+{
+    string Developer = "art/Developer.txt";
+    string welcome = "art/Art.txt";
+
+    student ct;
+    // system("color 71");
+    system("color 87");
+
+    system("cls");
+    ct.art(99, 2, welcome);
+    Sleep(1000);
+
+    system("cls");
+    ct.art(1, 0, Developer);
+    Sleep(4000);
+}
+
 void modify()
 {
     bool found = false;
