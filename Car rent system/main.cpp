@@ -59,6 +59,7 @@ struct car
 	float rate_per_half;
 	float rate_per_day;
 	char transmission[6];
+	
 };
 
 struct customer
@@ -114,7 +115,6 @@ const string Date()
 void time()
 {
 	int i = 0;
-
 	while (i < 5)
 	{
 		Boarder();
