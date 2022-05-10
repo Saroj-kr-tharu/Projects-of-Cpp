@@ -666,7 +666,6 @@ void display()
     {
         if (!file.eof())
         {
-
             while (file.read(reinterpret_cast<char *>(&stu), sizeof(student)))
             {
                 stu.display();

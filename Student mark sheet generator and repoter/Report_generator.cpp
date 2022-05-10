@@ -4,24 +4,28 @@
 #include <cmath>
 #include <conio.h>
 #include <windows.h>
+#include <string.h>
 
 using namespace std;
-
+string str;
 class student
 {
 private:
     int rollno, clas;
     double chem, math, phy, com, nep, percent;
-    string name;
-    string grade;
+
+    char name[30], grade[3], phone[13];
+    // string str;
 
 public:
     void input();
     void display();
+
     void calculate();
     int retClass();
     int retRollno();
     void art(int, int, string);
+    void animation(int, string);
 };
 
 void student ::art(int type, int speed, string name)
@@ -56,44 +60,47 @@ int student::retRollno()
 
 void student::calculate()
 {
+    string jok;
     //	double temp;
     percent = (chem + math + phy + com + nep) / 5;
     percent = round(percent);
 
     if (percent >= 90 && percent <= 100)
     {
-        grade = "A+";
+        jok = "A+";
     }
 
     else if (percent >= 80 && percent <= 90)
     {
-        grade = "A";
+        jok = "A";
     }
 
     else if (percent >= 70 && percent <= 80)
     {
-        grade = "B+";
+        jok = "B+";
     }
 
     else if (percent >= 60 && percent <= 70)
     {
-        grade = "B";
+        jok = "B";
     }
 
     else if (percent >= 50 && percent <= 60)
     {
-        grade = "C+";
+        jok = "C+";
     }
 
     else if (percent >= 40 && percent <= 50)
     {
-        grade = "C";
+        jok = "C";
     }
 
     else
     {
-        grade = "F";
+        jok = "F";
     }
+
+    strcpy(grade, jok.c_str());
 
     cout << endl
          << "\t\t Grade =" << grade;
@@ -102,47 +109,66 @@ void student::calculate()
 
 void student::input()
 {
-    fflush(stdin);
+
     cout << endl
-         << "\t\t <--------- Enter the name ---------> ";
+         << "\t\t <--------------------------------------->";
+    fflush(stdin);
+    str = "\n\t\t Enter Name -----> ";
+    animation(2, str);
     // cin >> name;
-    getline(cin, name);
-    cout << "\t\t <--------- Enter the Class ---------> ";
+    cin.getline(name, 30);
+    str = "\t\t Enter Class -----> ";
+    animation(2, str);
     cin >> clas;
-    cout
-        << "\t\t <--------- Enter the rollno ---------> ";
+    str = "\t\t Enter Roll no -----> ";
+    animation(2, str);
     cin >> rollno;
 
-    cout
-        << "\t\t <--------- Enter the marks of chemistry ---------> ";
+    str = "\n\t\t<--------- Entrying Marks --------> ";
+    animation(2, str);
+
+    str = "\n\t\t Enter Marks Of Chemistry ---> ";
+    animation(2, str);
     cin >> chem;
-    cout
-        << "\t\t <--------- Enter the marks of Math ---------> ";
+
+    str = "\t\t Enter Marks Of Math ---> ";
+    animation(2, str);
     cin >> math;
-    cout
-        << "\t\t <--------- Enter the marks of Physic ---------> ";
+    str = "\t\t Enter Marks Of Physics ---> ";
+    animation(2, str);
     cin >> phy;
-    cout
-        << "\t\t <--------- Enter the marks of Computer ---------> ";
+
+    str = "\t\t Enter Marks Of Computer ---> ";
+    animation(2, str);
     cin >> com;
-    cout << "\t\t <--------- Enter the marks of Nepali ---------> ";
+    str = "\t\t Enter Marks Of Nepali ---> ";
+    animation(2, str);
     cin >> nep;
     calculate();
+    cout << endl
+         << "\t\t <--------------------------------------->";
 }
 
 void student::display()
 {
 
     cout << endl
-         << "\t\t________________________________________";
+         << "\t\t_______________________________________________";
+
+    str = "\n\t\t Name Of Student ----> ";
+    animation(2, str);
+    cout << name;
+
+    str = "\n\t\t Class ----> ";
+    animation(2, str);
+    cout << clas;
+
+    str = "\n\t\t Roll No ----> ";
+    animation(2, str);
+    cout << rollno;
+
     cout << endl
-         << "\t\t Name of student -----> " << name;
-    cout << endl
-         << "\t\t Name of class -----> " << clas;
-    cout << endl
-         << "\t\t Name of Roll no -----> " << rollno;
-    cout << endl
-         << "\t\t________________________________________";
+         << "\t\t_________________________________________________";
     cout << endl
          << endl
          << "\t\t Marks of Math -------> " << math;
@@ -154,18 +180,20 @@ void student::display()
          << "\t\t Marks of Nepali ------->  " << nep;
     cout << endl
          << "\t\t Marks of Chemisty ------> " << chem;
-    cout << endl
-         << "\t\t Percentage --------------> " << percent;
+    str = "\n\t\t Precentage ----> ";
+    animation(2, str);
+    cout << percent;
+
     cout << endl
          << "\t\t Grade :-" << grade;
     cout << endl
          << "\t\t________________________________________";
-    getch();
 }
 
 void red();
 void wrte();
 void modify();
+void search();
 void del();
 void destory();
 void menu();
@@ -178,6 +206,16 @@ int main()
     menu();
 }
 
+void student::animation(int speed, string temp)
+{
+    int i = 0;
+    while (temp[i] != NULL)
+    {
+        cout << temp[i];
+        i++;
+        Sleep(speed);
+    }
+}
 void about()
 {
     string Developer = "art/Developer.txt";
@@ -189,7 +227,7 @@ void about()
 void menu()
 {
 
-    int choice;
+    int choice = 0;
     string Thankyou = "art/thankyou.txt";
     string banner = "art/banner.txt";
     string Developer = "art/Developer.txt";
@@ -200,7 +238,10 @@ void menu()
 
         system("cls");
         stu.art(2, 1, banner);
-
+        str = "\n\t\t <------  WELCOME TO MAIN MENU  -------> ";
+        stu.animation(2, str);
+        cout << endl
+             << "\t\t <---------------------------------------> ";
         cout << endl
              << "\t\t <------ 1 .  Input            ------->";
         cout << endl
@@ -210,13 +251,15 @@ void menu()
         cout << endl
              << "\t\t <------ 4 .  Delete           ------->";
         cout << endl
-             << "\t\t <------ 5 .  Destory database -------> ";
+             << "\t\t <------ 5 .  Destory database ------->";
         cout << endl
-             << "\t\t <------ 10.  About            -------> ";
+             << "\t\t <------ 6 .  Search           ------->";
         cout << endl
-             << "\t\t <------ 99.  Exit             -------> \t";
+             << "\t\t <------ 10.  About            ------->";
         cout << endl
-             << "\t\t <------------------------------------------------------> ";
+             << "\t\t <------ 99.  Exit             ------->";
+        cout << endl
+             << "\t\t <---------------------------------------> ";
         cin >> choice;
 
         switch (choice)
@@ -224,12 +267,14 @@ void menu()
         case 1:
             system("cls");
             stu.art(2, 1, banner);
-            wrte(); // inputing and writing
+            wrte();
+            getch(); // inputing and writing
             break;
         case 2:
             system("cls");
             stu.art(2, 1, banner);
-            red(); // reading and displaying
+            red();
+            getch(); // reading and displaying
             break;
         case 3:
             system("cls");
@@ -245,17 +290,24 @@ void menu()
             system("cls");
             stu.art(2, 1, banner);
             destory();
-        //	getch();
+            //	getch();
+            break;
+        case 6:
+            system("cls");
+            stu.art(2, 1, banner);
+            search();
+            //	getch();
+            break;
         case 10:
             system("cls");
             stu.art(2, 1, banner);
             about();
             break;
         case 99:
-        system("cls");
-        stu.art(99, 1, Thankyou);
-        system("exit");
-        break;
+            system("cls");
+            stu.art(99, 1, Thankyou);
+            system("exit");
+            break;
         default:
             break;
         }
@@ -266,16 +318,24 @@ void del()
 {
     bool found = false;
     char choice;
-    fstream file, newfile;
+    fstream file, outfile;
     student stu;
     int clas, roll;
 
-    file.open("Database.txt", ios::in);
-    newfile.open("temp.txt", ios::out);
+    file.open("database.txt", ios::in);
+    outfile.open("temp.txt", ios::out);
+
+    str = "\n\t\t <------  WELCOME TO DELETE SECTION  ------->";
+    stu.animation(2, str);
     cout << endl
-         << "\t\t <------ Enter class of the student ------->  ";
+         << "\t\t <--------------------------------------------------->";
+
+    str = "\n\t\t Enter Class -----> ";
+    stu.animation(2, str);
     cin >> clas;
-    cout << "\t\t <------ Enter Rollno of the student ------->  ";
+
+    str = "\t\t Enter Roll no -----> ";
+    stu.animation(2, str);
     cin >> roll;
 
     if (file.is_open())
@@ -284,40 +344,43 @@ void del()
         {
             while (file.read(reinterpret_cast<char *>(&stu), sizeof(student)))
             {
-                if ((stu.retClass() != clas) && (stu.retRollno() != roll))
+                if (stu.retClass() != clas && stu.retRollno() != roll)
                 {
-
-                    newfile.write(reinterpret_cast<char *>(&stu), sizeof(student));
+                    outfile.write(reinterpret_cast<char *>(&stu), sizeof(student));
                 }
-                else
-                {
+                if (stu.retClass() == clas && stu.retRollno() == roll)
                     found = true;
-                }
             }
         }
+        else
+        {
+            str = "\n\t\t  <-------- Unable to opened file  ----------> ";
+            stu.animation(2, str);
+            getch();
+        }
     }
-    else
-    {
-        cout << endl
-             << "\t\t <-------- Unable to opened file -------> ";
-        getch();
-    }
+
+    file.close();
+    outfile.close();
 
     if (found == false)
     {
-        cout << endl
-             << "\t\t <------------- Not founded ------------> ";
+
+        str = "\n\t\t  <-------- Not Founded  ----------> ";
+        stu.animation(2, str);
     }
     else
     {
-        cout << endl
-             << "\t\t <------------- Sucessfully delete ------------>";
-        remove("Database.txt");
-        rename("temp.txt", "Database.txt");
+        str = "\n\t\t  <-------- Sucessfully Delete  ----------> ";
+        stu.animation(2, str);
+
+        remove("database.txt");
+        rename("temp.txt", "database.txt");
     }
+
+    cout << endl
+         << "\t\t <-------------------------------------------------->";
     getch();
-    file.close();
-    newfile.close();
 }
 void intial()
 {
@@ -340,16 +403,24 @@ void intial()
 void modify()
 {
     bool found = false;
-    char choice;
+    char ch;
     fstream file;
     student stu;
     int clas, roll;
 
-    file.open("Database.txt", ios::in | ios::app);
+    file.open("database.txt", ios::in | ios::out);
+
+    str = "\n\t\t <------  WELCOME TO MODIFY SECTION  ------->";
+    stu.animation(2, str);
     cout << endl
-         << "\t\t <------------- Enter class of the student ------------>  ";
+         << "\t\t <--------------------------------------------------->";
+
+    str = "\n\t\t Enter Class -----> ";
+    stu.animation(2, str);
     cin >> clas;
-    cout << "\t\t <------------- Enter Rollno of the student ------------>  ";
+
+    str = "\t\t Enter Roll no -----> ";
+    stu.animation(2, str);
     cin >> roll;
 
     if (file.is_open())
@@ -358,34 +429,35 @@ void modify()
         {
             while (file.read(reinterpret_cast<char *>(&stu), sizeof(student)))
             {
-                if ((stu.retClass() == clas) && (stu.retRollno() == roll))
+                if (((stu.retClass() == clas) && (stu.retRollno() == roll)))
                 {
                     system("cls");
-                    cout << endl
-                         << "\t\t <------------- After return ---->" << stu.retClass();
-                    cout << endl
-                         << "\t\t <------------- Sucessfully found ------------>";
+
+                    str = "\n\t\t  <-------- Sucessfully Founded  ----------> ";
+                    stu.animation(2, str);
+
                     found = true;
                     stu.display();
-                    cout << endl
-                         << "\t\t <------------- Press y for to edit ------------> ";
-                    cin >> choice;
-                    if (choice == 'y' || choice == 'Y')
+
+                    str = "\n\t\t  <-------- Press Y For To Edit  ----------> ";
+                    stu.animation(2, str);
+                    fflush(stdin);
+                    ch = getch();
+                    if (ch == 'y' || ch == 'Y')
                     {
                         stu.input();
+
                         int pos = (-1) * static_cast<int>(sizeof(student)); // file pointer
                         file.seekp(pos, ios::cur);
-                        cout << endl
-                             << "\t\t IN file";
                         file.write(reinterpret_cast<char *>(&stu), sizeof(student));
-                        cout << endl
-                             << "\t\t <------------- Sucessfully Modified ------------>";
-                        getch();
+
+                        str = "\n\t\t  <-------- Sucessfully Modified  ----------> ";
+                        stu.animation(2, str);
                     }
                     else
                     {
-                        cout << endl
-                             << "\t\t <------------- NOt modified ------------>";
+                        str = "\n\t\t  <-------- Not Modified  ----------> ";
+                        stu.animation(2, str);
                     }
                 }
             }
@@ -393,51 +465,61 @@ void modify()
     }
     else
     {
-        cout << endl
-             << "\t\t <------------- Unable to opened file ------------>";
-        getch();
+
+        str = "\n\t\t  <-------- Unable to opened file  ----------> ";
+        stu.animation(2, str);
     }
 
     if (found == false)
     {
-        cout << endl
-             << "\t\t <------------- Not founded ------------> ";
+        str = "\n\t\t  <-------- Not Founded  ----------> ";
+        stu.animation(2, str);
     }
 
     file.close();
+    cout << endl
+         << "\t\t <--------------------------------------------------->";
+
+    getch();
+}
+
+void destory()
+{
+    student stu;
+    remove("database.txt");
+    cout << endl
+         << "\t\t<----  Welcome to Database Destory Section  ---->";
+    str = "\n\t\t  <-------- Sucessfully Destory  ----------> ";
+    stu.animation(2, str);
+    getch();
 }
 
 void red()
 {
     fstream file;
     student stu;
-    file.open("Database.txt", ios::in);
+    file.open("database.txt", ios::in);
 
     if (file.is_open())
     {
         if (!file.eof())
         {
+            str = "\n\t\t <------  WELCOME TO DISPLAY SECTION  -------> ";
+            stu.animation(2, str);
             while (file.read(reinterpret_cast<char *>(&stu), sizeof(student)))
             {
+
                 stu.display();
             }
         }
-        getch();
     }
     else
     {
-        cout << endl
-             << "\t\t <------------- Unable to opened file ------------>";
+        str = "\n\t\t  <-------- Unable to opened file  ----------> ";
+        stu.animation(2, str);
     }
-    file.close();
-}
-
-void destory()
-{
-    remove("Database.txt");
-    cout << endl
-         << "\t\t <------------- Sucessfully Delete ------------>";
     getch();
+    file.close();
 }
 
 void wrte()
@@ -445,22 +527,84 @@ void wrte()
     fstream file;
     student stu;
 
-    file.open("Database.txt", ios::app);
-    stu.input();
-    cout << endl
-         << "\t\t <------------- Rechecking the data ------------> ";
-    stu.display();
+    str = "\n\t\t <------  WELCOME TO INPUT SECTION  ------->";
+    stu.animation(2, str);
+    file.open("database.txt", ios::app);
+    // stu.input();
+
     if (file.is_open())
     {
+        stu.input();
+        str = "\n\t\t  <-------- Rechecking The Data  ----------> ";
+        stu.animation(2, str);
+        stu.display();
         file.write(reinterpret_cast<char *>(&stu), sizeof(student));
-        // file.write(reinterpret_cast<char *>(&stu), sizeof(student) );
-        cout << endl
-             << "\t\t <------------- File is sucessfull written to the database ------------>";
+        str = "\n\t\t  <-------- Sucessfully Written to File  ----------> ";
+        stu.animation(2, str);
     }
     else
     {
-        cout << endl
-             << "\t\t <------------- Unable to opened file ------------>";
+        str = "\n\t\t <----- File is not Opened ----->";
+        stu.animation(2, str);
     }
     file.close();
+}
+
+void search()
+{
+    bool found = false;
+    char ch;
+    fstream file;
+    student stu;
+    int clas, roll;
+
+    file.open("database.txt", ios::in);
+
+    str = "\n\t\t <------  WELCOME TO SEARCH SECTION  ------->";
+    stu.animation(2, str);
+    cout << endl
+         << "\t\t <--------------------------------------------------->";
+
+    str = "\n\t\t Enter Class -----> ";
+    stu.animation(2, str);
+    cin >> clas;
+
+    str = "\t\t Enter Roll no -----> ";
+    stu.animation(2, str);
+    cin >> roll;
+
+    if (file.is_open())
+    {
+        if (!file.eof())
+        {
+            system("cls");
+            while (file.read(reinterpret_cast<char *>(&stu), sizeof(student)))
+            {
+                if ((stu.retClass() == clas) && (stu.retRollno() == roll))
+                {
+                    str = "\n\t\t  <-------- Sucessfully Founded  ----------> ";
+                    stu.animation(2, str);
+                    found = true;
+                    stu.display();
+                }
+            }
+        }
+    }
+    else
+    {
+
+        str = "\n\t\t  <-------- Unable to opened file  ----------> ";
+        stu.animation(2, str);
+    }
+
+    if (found == false)
+    {
+        str = "\n\t\t  <-------- Not Founded  ----------> ";
+        stu.animation(2, str);
+    }
+
+    cout << endl
+         << "\t\t <--------------------------------------------------->";
+    file.close();
+    getch();
 }

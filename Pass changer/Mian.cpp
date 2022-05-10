@@ -23,14 +23,24 @@ public:
 	void pass_change();
 	void add_in_admin();
 	void remove_from_admin();
+	void animation(int, string);
 	string banner = "art/banner.txt";
 	string admin = "art/admin.txt";
 	string thankyou = "art/thankyou.txt";
-
 };
 void menu();
 void intial();
 void art(int, int, string); // type,speed,filename
+void sys::animation(int speed, string temp)
+{
+	int i = 0;
+	while (temp[i] != NULL)
+	{
+		cout << temp[i];
+		i++;
+		Sleep(speed);
+	}
+}
 void intial()
 {
 	string Developer = "art/Developer.txt";
@@ -78,21 +88,27 @@ int main()
 }
 void sys::user_list()
 {
-	
+	str = "\n\t   <----------- LIST USER ------------>";
+	animation(2, str);
+
+	str = "\n\t   <----- Showing ----->";
 	system("net user");
+	animation(2, str);
 }
 void sys::new_user()
 {
-	
+	str = "\n\t   <----------- ADD NEW USER ------------>";
+	animation(2, str);
 	system("net user");
-	cout << endl
-		 << "\t\t Enter the username to add ";
+	str = "\n\t\t Enter New Username ----->";
+	animation(2, str);
+
 	fflush(stdin);
 	cout << endl;
 	getline(cin, username);
 
-	cout << endl
-		 << "\t\t Enter the password to add ";
+	str = "\n\t\t Enter Password ----->";
+	animation(2, str);
 	fflush(stdin);
 	cout << endl;
 	getline(cin, password);
@@ -110,13 +126,18 @@ void sys::new_user()
 	cout << endl
 		 << "\t\t " << strfinal;
 	system(strfinal);
+
+	str = "\n\t   <----------- SUCESSFULLY ADDED  ------------>";
+	animation(2, str);
 }
 void sys::del_user()
 {
-	
+	str = "\n\t   <----------- DELETE USER ------------>";
+	animation(2, str);
+
 	system("net user");
-	cout << endl
-		 << "\t\t Enter the user name to delete ";
+	str = "\n\t\t Enter Username ----->";
+	animation(2, str);
 	fflush(stdin);
 	cout << endl;
 	getline(cin, username);
@@ -132,14 +153,21 @@ void sys::del_user()
 	}
 
 	system(strfinal);
+
+	str = "\n\t   <----------- SUCESSFULLY DELETED ";
+	animation(2, str);
+	str = username + "  ------------>";
+	animation(2, str);
 }
 
 void sys::pass_change()
 {
-	
+	str = "\n\t   <----------- WELCOME TO PASS CHANGER  ------------>";
+	animation(2, str);
 	system("net user");
-	cout << endl
-		 << "\t\t Enter username to change the password";
+
+	str = "\n\t\t Enter  Username ----->";
+	animation(2, str);
 	//	getline(username,cin);
 	fflush(stdin);
 	cout << endl;
@@ -156,14 +184,19 @@ void sys::pass_change()
 	}
 
 	system(strfinal);
+	str = "\n\t   <----------- SUCESSFULLY CHANGED PASSWORD  ------------>";
+	animation(2, str);
 }
 
 void sys::add_in_admin()
 {
-	
+	str = "\n\t\t\t  <-----------  WELCOME TO ADD IN ADMINITRATION  ------------>";
+	animation(2, str);
+
 	system("net user");
-	cout << endl
-		 << "\t\t Enter the user name to add in admin group ";
+	str = "\n\t\t Enter  Username ----->";
+	animation(2, str);
+
 	fflush(stdin);
 	cout << endl;
 	getline(cin, username);
@@ -178,14 +211,20 @@ void sys::add_in_admin()
 	}
 	//	cout<<endl<<"\t\t "<<strfinal;
 	system(strfinal);
+	str = "\n\t   <----------- SUCESSFULLY ADDED IN ADMINITRATION ------------>";
+	animation(2, str);
 }
 
 void sys::remove_from_admin()
 {
-	
+	str = "\n\t   <----------- WELCOME TO REMOVE FROM ADMIN  ------------>";
+	animation(2, str);
+
 	system("net user");
-	cout << endl
-		 << "\t\t Enter the user name to delete in admin group ";
+
+	str = "\n\t\t Enter  Username ----->";
+	animation(2, str);
+
 	fflush(stdin);
 	cout << endl;
 	getline(cin, username);
@@ -200,6 +239,8 @@ void sys::remove_from_admin()
 	}
 	//	cout<<endl<<"\t\t "<<strfinal;
 	system(strfinal);
+	str = "\n\t   <----------- SUCESSFULLY REMOVED FROM ADMIN  ------------>";
+	animation(2, str);
 }
 void sys::menu()
 {
@@ -207,6 +248,9 @@ void sys::menu()
 	do
 	{
 		system("cls");
+		art(2, 1, banner);
+		str = "\n\t\t\t  <-----------  WELCOME TO MAIN MENU  ------------>";
+		animation(2, str);
 		cout << endl
 			 << "\t\t <-------------------------------------------------------->";
 		cout << endl
@@ -249,44 +293,45 @@ void sys::menu()
 
 			break;
 		case 3:
-		system("cls");
-			art(9,0,banner);
+			system("cls");
+			art(9, 0, banner);
 			del_user();
 			getch();
 			break;
 
 		case 4: // add user
-		system("cls");
-			art(9,0,banner);
+			system("cls");
+			art(9, 0, banner);
 			new_user();
 			getch();
 			break;
 		case 5:
-		system("cls");
-			art(9,0,banner);
+			system("cls");
+			art(9, 0, banner);
 			add_in_admin();
 			getch();
 			break;
 		case 6:
-		system("cls");
-			art(9,0,banner);
+			system("cls");
+			art(9, 0, banner);
 			remove_from_admin();
 			getch();
 			break;
 		case 99:
 			system("cls");
-			art(99,1,thankyou);
+			art(99, 1, thankyou);
 			getch();
 			break;
 		case 100:
 			system("cls");
-			art(99,2,admin);
+			art(99, 2, admin);
 			getch();
 			break;
 
 		default:
-			cout << endl
-				 << "\t\t<------  Invalid options -----> ";
+			str = "\n\t   <----- INVALID OPTIONS ---->";
+			animation(2, str);
+
 			break;
 		}
 	} while (ch != 99);

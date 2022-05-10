@@ -10,7 +10,7 @@ private:
     int new_years, new_month, new_day;
     //    string Nepali[11];
     //    string English[11];
-   
+    string str;
 
 public:
     void menu();
@@ -18,8 +18,18 @@ public:
     void Bs_To_Ad();
     void Ad_TO_BS();
     void art(int, int, string); // type , speed ,filename
+    void animation(int, string);
 };
-
+void convertor::animation(int speed, string temp)
+{
+    int i = 0;
+    while (temp[i] != NULL)
+    {
+        cout << temp[i];
+        i++;
+        Sleep(speed);
+    }
+}
 void convertor::art(int type, int speed, string name)
 {
     string filename(name);
@@ -43,8 +53,8 @@ void convertor::art(int type, int speed, string name)
 void convertor::input()
 {
 
-    cout << endl
-         << "\t\t Enter the day in years/month/day --------------------->";
+    str = "\n\t\t Enter the day in years/month/day --------------------->";
+    animation(2, str);
     fflush(stdin);
     cin >> years;
     cin.ignore(1, '/');
@@ -66,8 +76,8 @@ void convertor::Bs_To_Ad()
     string Nepali[] = {"Baishak", "Jetha", "Ashar", "Shrawan", "Bhadra", "Ashoj", "Kartik", "Mangir", "Poush", "Magh", "Falgun", "Chaitra"};
     string English[] = {"Januray", "Feburary", "March", "April", "May", "June", "July", "Auguest", "September", "Octber", "November", "December"};
 
-    cout << endl
-         << "\t\t <------------------------ BS TO AD --------------------------> ";
+    str = "\t\t <--------------------------- BS TO AD  --------------------------> ";
+    animation(2, str);
     cout << endl
          << "\t\t <---------- Enter Date in BS ---------> ";
     input();
@@ -95,15 +105,73 @@ void convertor::Bs_To_Ad()
     years -= 56;
 
     cout << endl
-         << "\t\t In Bs -----> " << new_years << "/" << new_month << "/" << new_day;
+         << "\t\t";
+    str = "In BS ------>";
+    animation(2, str);
+
+    cout << new_years;
+
+    str = "/";
+    animation(2, str);
+
+    cout << new_month;
+
+    str = "/";
+    animation(2, str);
+
+    cout << new_day;
+
     cout << endl
-         << "\t\t In BS -----> " << new_years << "/" << Nepali[new_month - 1] << "/" << new_day;
+         << "\t\t";
+    str = "In BS ------>";
+    animation(2, str);
+
+    cout << new_years;
+
+    str = "/";
+    animation(2, str);
+
+    cout << Nepali[new_month - 1];
+
+    str = "/";
+    animation(2, str);
+
+    cout << new_day;
 
     cout << endl
          << endl
-         << "\t\t In Ad -----> " << years << "/" << month << "/" << day;
+         << "\t\t";
+    str = "In AD ------>";
+    animation(2, str);
+
+    cout << years;
+
+    str = "/";
+    animation(2, str);
+
+    cout << month;
+
+    str = "/";
+    animation(2, str);
+
+    cout << day;
+
     cout << endl
-         << "\t\t In AD -----> " << years << "/" << English[month - 1] << "/" << day;
+         << "\t\t";
+    str = "In AD ------>";
+    animation(2, str);
+
+    cout << years;
+
+    str = "/";
+    animation(2, str);
+
+    cout << English[new_month - 1];
+
+    str = "/";
+    animation(2, str);
+
+    cout << day;
 }
 
 void convertor::Ad_TO_BS()
@@ -111,8 +179,8 @@ void convertor::Ad_TO_BS()
     string Nepali[] = {"Baishak", "Jetha", "Ashar", "Shrawan", "Bhadra", "Ashoj", "Kartik", "Mangir", "Poush", "Magh", "Falgun", "Chaitra"};
     string English[] = {"Januray", "Feburary", "March", "April", "May", "June", "July", "Auguest", "September", "Octber", "November", "December"};
 
-    cout << endl
-         << "\t\t <--------------------------- AD TO BS --------------------------> ";
+    str = "\n\t\t <--------------------------- AD TO BS --------------------------> ";
+    animation(2, str);
     cout << endl
          << "\t\t <--------------------------- Enter Date in AD --------------------------> ";
     input();
@@ -213,37 +281,100 @@ void convertor::Ad_TO_BS()
     years += 56;
 
     cout << endl
-         << "\t\t In AD -----> " << new_years << "/" << new_month << "/" << new_day;
-    cout << endl
-         << "\t\t In Bs -----> " << new_years << "/" << English[new_month - 1] << "/" << new_day;
+         << "\t\t";
+    str = "In AD ------>";
+    animation(2, str);
+
+    cout << new_years;
+
+    str = "/";
+    animation(2, str);
+
+    cout << new_month;
+
+    str = "/";
+    animation(2, str);
+
+    cout << new_day;
+    animation(2, str);
 
     cout << endl
-         << endl
-         << endl
-         << "\t\t In BS -----> " << years << "/" << month << "/" << day;
+         << "\t\t";
+    str = "In BS ------>";
+    animation(2, str);
+
+    cout << new_years;
+
+    str = "/";
+    animation(2, str);
+
+    cout << English[new_month - 1];
+
+    str = "/";
+    animation(2, str);
+
+    cout << new_day;
+
     cout << endl
-         << "\t\t In Bs -----> " << years << "/" << Nepali[month - 1] << "/" << day;
+         << endl;
+    cout << endl
+         << "\t\t";
+    str = "In BS ------>";
+    animation(2, str);
+
+    cout << years;
+
+    str = "/";
+    animation(2, str);
+
+    cout << month;
+
+    str = "/";
+    animation(2, str);
+
+    cout << day;
+
+    cout << endl
+         << "\t\t";
+    str = "In BS ------>";
+    animation(2, str);
+
+    cout << years;
+
+    str = "/";
+    animation(2, str);
+
+    str = Nepali[month - 1];
+    animation(2, str);
+    str = "/";
+    animation(2, str);
+
+    cout << day;
 }
 
 void convertor::menu()
 {
     int choice, num;
-     string banner = "art/banner.txt";
+    string banner = "art/banner.txt";
     string Developer = "art/Developer.txt";
     string welcome = "art/Art.txt";
     string Thankyou = "art/thankyou.txt";
     do
     {
         system("cls");
+        art(2, 1, banner);
+        str = "\n\t    <------  WELCOME TO MAIN MENU  -------> ";
+        animation(2, str);
         cout << endl
-             << endl
              << "\t ________________________________________________";
         cout << endl
              << "\t\t Please select appropriate key";
-        cout << endl
-             << "\t\t<--------- 1  ) BS TO AD ---------->";
-        cout << endl
-             << "\t\t<--------- 2  ) AD TO BS ---------->";
+
+        str = "\n\t\t<--------  1. BS TO AD  --------->";
+        animation(2, str);
+
+        str = "\n\t\t<--------  2. AD TO BS  --------->";
+        animation(2, str);
         cout << endl
              << "\t\t<--------- 99 ) Exit ---------->" << endl;
         cout << "\t ________________________________________________";
@@ -264,26 +395,27 @@ void convertor::menu()
             break;
 
         case 99:
-             system("cls");
-            art(99,1,Thankyou);
-            
+            system("cls");
+            art(99, 1, Thankyou);
+
             break;
         default:
-            cout << endl
-                 << "\t\t Invalid key";
+            str = "\n\t<----- Invalid Options ------>";
+            animation(2, str);
             break;
         }
 
     } while (choice != 99);
 }
 
-int main()
+void intial();
+
+void intial()
 {
     convertor con;
-    
     string Developer = "art/Developer.txt";
     string welcome = "art/Art.txt";
-    
+
     system("cls");
     system("color 2f");
 
@@ -293,7 +425,11 @@ int main()
     system("cls");
     con.art(1, 0, Developer);
     getch();
-
+}
+int main()
+{
+    convertor con;
+    intial();
     con.menu();
 
     return 0;

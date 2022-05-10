@@ -8,7 +8,8 @@ class jok
 {
 private:
     string input, output;
-    int length;
+    int len;
+    string str; // string for animation
 
 public:
     // void input();
@@ -16,10 +17,20 @@ public:
     void encrypt();
     void decrpt();
     void menu();
+    void animation(int, string);
 };
 void Initial();
 void art(int, int, string);
-
+void jok::animation(int speed, string temp)
+{
+    int i = 0;
+    while (temp[i] != NULL)
+    {
+        cout << temp[i];
+        i++;
+        Sleep(speed);
+    }
+}
 void Initial()
 {
     string Developer = "art/Developer.txt";
@@ -67,6 +78,9 @@ void jok ::menu()
     do
     {
         system("cls");
+        art(2, 1, banner);
+        str = "\n\t\t\t\t <------  WELCOME TO MAIN MENU  -------> ";
+        animation(2, str);
         cout << endl
              << "\t\t\t\t <---------------------------------->";
         cout << endl
@@ -117,52 +131,61 @@ void jok ::menu()
 
 void jok::encrypt()
 {
-    cout << endl
-         << "\t\t\t\t<-------------- Input Section ----------->";
-    cout << endl
-         << "\t\t\t    Input String ------>";
+
+    str = "\n\t\t\t\t <------  WELCOME TO INPUT SECTION  -------> ";
+    animation(2, str);
+
+    str = "\n\t\t\t\t  Input String -------> ";
+    animation(2, str);
+    fflush(stdin);
     cin >> input;
 
-    int length = input.length();
-    char temp[length + 1], output[length + 1];
+    int len = input.length();
+    char temp[len + 1], output[len + 1];
 
     strcpy(temp, input.c_str());
-    for (int i = 0; i < length; i++)
+    for (int i = 0; i < len; i++)
     {
-
         output[i] = (temp[i] + 4);
     }
-    cout << endl
-         << "\t\t\t   Encrypted string ---> " << output;
+    str = "\t\t\t\t  Encrypted String -------> ";
+    animation(2, str);
+    cout << output;
 }
 
 void jok::decrpt()
 {
     // cout<<endl<<"\t\t<-------------- Display Section ----------->;
-    cout << endl
-         << "\t\t    Decrypt String ------>";
+    str = "\n\t\t\t <------  WELCOME TO   DECRYPTED  SECTION  -------> ";
+    animation(2, str);
+
+    str = "\n\t\t\t\t  Encrypted String -------> ";
+    animation(2, str);
     cin >> input;
 
-    int length = input.length();
-    char temp[length + 1], output[length + 1];
+    int len = input.length();
+    char temp[len], output[len];
 
     strcpy(temp, input.c_str());
 
-    // for(int i=0; i<=length; i++){
+    // for(int i=0; i<=len; i++){
     //     output[i]=temp[i]-4;
     // }
     cout << endl;
-    for (int i = 0; i < length; i++)
+    fflush(stdin);
+    for (int i = 0; i < len - 2; i++)
     {
         output[i] = (temp[i] - 4);
         // cout<<output[i];
     }
-    cout << "\t\t       Decrypted string --------> ";
+
+    str = "\t\t\t\t       Decrypted String -------> ";
+    animation(2, str);
     cout << output;
 }
 int main()
 {
     jok jo;
-    Initial();
+    // Initial();
     jo.menu();
 }

@@ -14,6 +14,7 @@ private:
     string welcome = "Art.txt";
     string developer = "Developer.txt";
     string thankyou = "thankyou.txt";
+    string str;
 
 public:
     void menu();
@@ -26,7 +27,18 @@ public:
     int numOfday(int);
     int month_finder(int, int);
     int dayfinder(int, int, int);
+    void animation(int, string); // speed,file
 };
+void calender::animation(int speed, string temp)
+{
+    int i = 0;
+    while (temp[i] != NULL)
+    {
+        cout << temp[i];
+        i++;
+        Sleep(speed);
+    }
+}
 
 void calender::art(int type, string name)
 {
@@ -63,17 +75,20 @@ void calender::menu()
     {
 
         system("cls");
+        art(2, banner);
+        str = "\n\t\t\t  <------  WELCOME TO MAIN MENU  -------> ";
+        animation(2, str);
         cout << endl
              << "\t\t <---------------------------------------------------------->";
 
         cout << endl
-             << "\t\t <-------   1  . Calender of the year         -------------> ";
+             << "\t\t <-------   1  .  Calender of the year         -------------> ";
         cout << endl
-             << "\t\t <-------   2  . Search a Particular Year Calender --------> ";
+             << "\t\t <-------   2  .  Search a Particular Year Calender --------> ";
         cout << endl
-             << "\t\t <-------   10  .  About Developer            -------------> ";
+             << "\t\t <-------   10  . About Developer            -------------> ";
         cout << endl
-             << "\t\t <-------   99 . Exit                           -----------> ";
+             << "\t\t <-------   99 .  Exit                           -----------> ";
 
         cout << endl
              << "\t\t <---------------------------------------------------------->";
@@ -83,36 +98,39 @@ void calender::menu()
         {
         case 1:
             type = 1;
-            cout<<endl<<"\t\t Enter the date ------>";
-            cin>>date;
+            str = "\n\t\t Enter Date -----> ";
+            animation(2, str);
+            cin >> date;
             display(date, 1, 1, type); // date /month/day
             getch();
             break;
 
         case 2: // Showing a particular date of the year
-            top:
+        top:
             type = 2;
-            cout << endl
-                 << "\t\t Enter the date ---> ";
+            str = "\n\t\t Enter Years -----> ";
+            animation(2, str);
             fflush(stdin);
             cin >> date;
-            cout << "\t\t Enter the month ----> ";
+            str = "\t\t Enter Month -----> ";
+            animation(2, str);
             cin >> month;
-            if(month>12){
-                cout<<endl<<"\t\t <------- Month should not be greater than 12 ------->";
+            if (month > 12)
+            {
+                str = "\n\t\t <------ Month Should not be greater than 12 -----> ";
+                animation(2, str);
                 goto top;
             }
-
 
             display(date, month - 1, 1, type);
             getch();
 
             break;
-        case 10: // developer 
-         system("cls");
-            art(99,developer);
+        case 10: // developer
+            system("cls");
+            art(99, developer);
             getch();
-        break;
+            break;
         case 99:
 
             system("cls");
@@ -121,8 +139,8 @@ void calender::menu()
             break;
 
         default:
-            cout << endl
-                 << "\t\t<------  Invalid options -----> ";
+            str = "\n\t\t <---- Invalid options  -----> ";
+            animation(2, str);
             break;
         }
     } while (ch != 99);
@@ -199,17 +217,20 @@ void calender::display(int date, int entry_month, int day, int type)
             }
         }
 
-        cout << endl
-             << "\t 1. Next Month ";
-        cout << endl
-             << "\t 2. Previous Month ";
-        cout << endl
-             << "\t 3. Next year  ";
-        cout << endl
-             << "\t 4. Previous year  ";
+        str = "\n\t 1. Next Month ";
+        animation(2, str);
 
-        cout << endl
-             << "\t 100. Return main menu ";
+        str = "\n\t 2. Previous Month ";
+        animation(2, str);
+
+        str = "\n\t 3. Next Years ";
+        animation(2, str);
+
+        str = "\n\t 4. Previous Year ";
+        animation(2, str);
+
+        str = "\n\t 100. Return To Main Menu ";
+        animation(2, str);
         cout << endl
              << "\t<----------------------------->";
         cin >> ch;
@@ -306,10 +327,17 @@ int calender::month_finder(int num, int date)
     // days = for total number of day in a month
     int days = 0;
 
-    cout << endl
-         << "                               " << date << endl
-         << "     <--------------------   " << month[num] << "   ------------------->";
+    // cout << endl
+    //      << "                               " << date << endl
+    //      << "     <--------------------   " << month[num] << "   ------------------->";
+    cout<<endl;
+    str = "                               ";
+    animation(2, str);
+    cout << date;
 
+    cout << endl;
+    str = "     <--------------------   " + month[num] + "    ------------------->";
+    animation(2, str);
     num = num + 1;
 
     if (num == 1)

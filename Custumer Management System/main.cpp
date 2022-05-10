@@ -75,7 +75,7 @@ void linked::search_by_address()
      struct node *ptr;
      ptr = head;
 
-     str = "\n\t  <-------- WELCOME TO SEARCH BY ADDRESS SECTION ----------> ";
+     str = "\n\t\t <--------- WELCOME TO SEARCH BY ADDRESS SECTION ----------> ";
      wrt(2, str);
 
      str = "\n\t\t Enter Address ---> ";
@@ -136,7 +136,7 @@ void linked::search_by_name()
      struct node *ptr;
      ptr = head;
 
-     str = "\n\t  <-------- WELCOME TO SEARCH BY NAME SECTION ----------> ";
+     str = "\n\t\t <--------- WELCOME TO SEARCH BY NAME SECTION ----------> ";
      wrt(2, str);
 
      str = "\n\t\t Enter Name ---> ";
@@ -184,7 +184,7 @@ void linked::search_by_name()
           ptr = ptr->next;
      }
 
-      if (choice != 99 && choice ==0)
+     if (choice != 99 && choice == 0)
      {
           str = "\n\t\t  <----- NOT FOUNDED -----> ";
           wrt(2, str);
@@ -198,7 +198,7 @@ void linked::search_by_phone()
      struct node *ptr;
      ptr = head;
 
-     str = "\n\t  <-------- WELCOME TO SEARCH BY PHONE SECTION ----------> ";
+     str = "\n\t\t <--------- WELCOME TO SEARCH BY PHONE SECTION ----------> ";
      wrt(2, str);
      str = "\n\t\t Enter Phone ---> ";
      wrt(2, str);
@@ -244,7 +244,7 @@ void linked::search_by_phone()
 
           ptr = ptr->next;
      }
-      if (choice != 99 && choice ==0)
+     if (choice != 99 && choice == 0)
      {
           str = "\n\t\t  <----- NOT FOUNDED -----> ";
           wrt(2, str);
@@ -256,7 +256,7 @@ void linked::search_by_id()
      struct node *ptr;
      ptr = head;
 
-     str = "\n\t  <-------- WELCOME TO SEARCH BY ID SECTION ----------> ";
+     str = "\n\t\t <--------- WELCOME TO SEARCH BY ID SECTION ----------> ";
      wrt(2, str);
 
      str = "\n\t\t Enter id ---> ";
@@ -301,7 +301,7 @@ void linked::search_by_id()
 
           ptr = ptr->next;
      }
-      if (choice != 99)
+     if (choice != 99)
      {
           str = "\n\t\t  <----- NOT FOUNDED -----> ";
           wrt(2, str);
@@ -681,7 +681,7 @@ void linked::del()
 
                str = "\n\t\t  <-------- Returning To Main Menu  ----------> ";
                wrt(2, str);
-               
+
                break;
           case 10:
                system("cls");
@@ -704,7 +704,7 @@ void linked::deleteAtPosition()
      str = "\n\t\t  <-------- WELCOME TO DELETE AT ANY POSITION SECTION  ----------> ";
      wrt(2, str);
 
-     str = "\n\t  Enter Position ----> ";
+     str = "\n\t\t Enter Positi ----> ";
      wrt(2, str);
 
      cin >> pos;
@@ -722,7 +722,7 @@ void linked::deleteAtPosition()
      back->next = ptr->next;
      free(ptr);
 
-     str = "\n\t\t  <-------- Sucessfully Delete At Position ";
+     str = "\n\t\t  <-------- Sucessfully Delete At Position  ";
      wrt(2, str);
      cout << pos;
      str = " ----------> ";
@@ -846,7 +846,7 @@ void linked::insert_at_end()
      last->next = ptr;
      ptr->next = NULL;
 
-     str = "\n\t  <-------- Sucessfully Insert after at end ----------> ";
+     str = "\n\t\t <--------- Sucessfully Insert after at end ----------> ";
      wrt(2, str);
 }
 
@@ -887,7 +887,7 @@ void linked::insert_after_node(struct node *back)
      ptr->next = back->next;
      back->next = ptr;
 
-     str = "\n\t  <-------- Sucessfully Instread after second node  ----------> ";
+     str = "\n\t\t <--------- Sucessfully Instread after second node  ----------> ";
      wrt(2, str);
 }
 
@@ -1004,7 +1004,7 @@ void linked::insert()
 
           case 99:
 
-               str = "\n\t  <-------- Returning To Main Menu ----------> ";
+               str = "\n\t\t <--------- Returning To Main Menu ----------> ";
                wrt(2, str);
 
                break;
@@ -1015,7 +1015,7 @@ void linked::insert()
                break;
           default:
 
-               str = "\n\t  <-------- Invalid options ----------> ";
+               str = "\n\t\t <--------- Invalid options ----------> ";
                wrt(2, str);
                break;
           }
@@ -1030,7 +1030,7 @@ void linked::edit()
      int elements;
      char temp[50];
 
-     str = "\n\t  <-------- Editing Section ----------> ";
+     str = "\n\t\t <--------- Editing Section ----------> ";
      wrt(2, str);
      display();
 
@@ -1041,7 +1041,7 @@ void linked::edit()
 
      if (ptr == NULL)
      {
-          str = "\n\t  <-------- List is empty ----------> ";
+          str = "\n\t\t <--------- List is empty ----------> ";
           wrt(2, str);
           return;
      }
@@ -1052,7 +1052,7 @@ void linked::edit()
           {
                system("cls");
 
-               str = "\n\t  <-------- Current Information ----------> ";
+               str = "\n\t\t <--------- Current Information ----------> ";
                wrt(2, str);
 
                str = "\n\t   Current id ---> ";
@@ -1077,7 +1077,7 @@ void linked::edit()
 
                ;
 
-               str = "\n\n\t  <-------- New Information Filling  ----------> ";
+               str = "\n\n\t\t <--------- New Information Filling  ----------> ";
                wrt(2, str);
 
                str = "\n\t   Enter New id ---> ";
@@ -1117,7 +1117,7 @@ void linked::edit()
 // Displaying section
 void linked::display()
 {
-     str = "\n\t  <-------- WELCOME TO DISPLAY SECTION ----------> ";
+     str = "\n\t\t <--------- WELCOME TO DISPLAY SECTION ----------> ";
      wrt(2, str);
 
      struct node *ptr = head;
@@ -1133,20 +1133,24 @@ void linked::display()
           str = " ---> ";
           wrt(2, str);
 
-       
-          cout<<endl<<"\t\t ID --->";
+          cout << endl
+               << "\t\t ID --->";
           cout << ptr->id;
 
-           cout<<endl<<"\t\t NAME --->";
+          cout << endl
+               << "\t\t NAME --->";
           cout << ptr->name;
 
-           cout<<endl<<"\t\t ADDRESS --->";
+          cout << endl
+               << "\t\t ADDRESS --->";
           cout << ptr->address;
 
-           cout<<endl<<"\t\t PHONE --->";
+          cout << endl
+               << "\t\t PHONE --->";
           cout << ptr->phone;
 
-           cout<<endl<<"\t\t AGE --->";
+          cout << endl
+               << "\t\t AGE --->";
           cout << ptr->age;
 
           cout << endl
@@ -1243,7 +1247,7 @@ void linked::menu()
                getch();
                break;
           default:
-               str = "\n\t  <-------- Invalid options ----------> ";
+               str = "\n\t\t <--------- Invalid options ----------> ";
                wrt(2, str);
                break;
           }

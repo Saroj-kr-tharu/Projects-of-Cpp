@@ -1,454 +1,481 @@
+/* This program is designed by Saroj kumar tharu to manage student management system */
 #include <iostream>
 #include <fstream>
 #include <conio.h>
+#include <algorithm>
 #include <windows.h>
 using namespace std;
-
-class book
+string str;
+class student
 {
 private:
-    string book_name, auther, publisher;
-    float price;
-    int stock, book_id;
-    string banner = "banner.txt";
-    string Developer = "Developer.txt";
-    string welcome = "Art.txt";
-    string Thanyou = "thankyou.txt";
+    char name[30], Auther[50], publication[100];
+    int id, stock;
 
 public:
     void input();
     void display();
-    string retname();
-    string retauther();
-    string retpublisher();
-    float retprice();
     int retid();
-
-    void art(int, int, string); // type, speed , filename
+    void art(int, int, string); // type , speed, Filename
+    void about();
+    void animation(int, string); // string for to store data  // speed,string
 };
-void book::art(int type, int speed, string name)
+void student::about()
+{
+    string Developer = "art/Developer.txt";
+    system("cls");
+    art(99, 1, Developer);
+}
+
+void student ::art(int type, int speed, string name)
 {
     string filename(name);
-    unsigned char character = 0;
-    FILE *inputFile = fopen(filename.c_str(), "r");
 
-    while (!feof(inputFile))
+    FILE *input_file = fopen(filename.c_str(), "r");
+    unsigned char character;
+    while (!feof(input_file))
     {
-        character = getc(inputFile);
+        character = getc(input_file);
+
         if (type == 99)
             Sleep(speed);
         else
-            Sleep(speed);
+            Sleep(0);
 
         cout << character << "";
     }
     cout << endl;
-    fclose(inputFile);
+    fclose(input_file);
 }
 
-string book::retauther()
+int student::retid()
 {
-    return auther;
-}
-string book::retpublisher()
-{
-    return publisher;
-}
-string book::retname()
-{
-    return book_name;
-}
-float book::retprice()
-{
-    return price;
-}
-int book::retid()
-{
-    return book_id;
+    return id;
 }
 
-void book::input()
+void student::input()
 {
-    stock = 0;
-    cout << endl
-         << "\t\t<------------ Entey Section --------->";
-    cout << endl
-         << "\t\t Enter Id of book -----------> ";
-    cin >> book_id;
-    cout << "\t\t Enter Name of book -----------> ";
-    // cin>>book_name;
-    fflush(stdin);
-    getline(cin, book_name);
-    cout << "\t\t Enter Auther of book -----------> ";
-    fflush(stdin);
-    getline(cin, auther);
-    // cin>>auther;
-    cout << "\t\t Enter Publicsher of book -----------> ";
-    fflush(stdin);
-    getline(cin, publisher);
+    // system("cls");
+    str = "\n\t\t\t\t   Enter  Book Id ----->";
+    animation(2, str);
+    cin >> id;
 
-    cout << "\t\t Enter Stock of book -----------> ";
+    str = "\t\t\t\t   Enter Book Name ----->";
+    animation(2, str);
+    fflush(stdin);
+    cin.getline(name, 30);
+    // cin.ignore();
+    str = "\t\t\t\t   Enter  Book Auther ----->";
+    animation(2, str);
+    fflush(stdin);
+    cin.getline(Auther, 50);
+
+    str = "\t\t\t\t   Enter Publication Of The Book ----->";
+    animation(2, str);
+    fflush(stdin);
+    cin.getline(publication, 100);
+    str = "\t\t\t\t   Enter  Stock of Book ----->";
+    animation(2, str);
     cin >> stock;
-    cout << "\n";
-    // cin>>publisher;
+    cout << endl
+         << "\t\t\t <---------------------------------------------------->";
 }
 
-void book::display()
+void student::display()
 {
+    // system("cls");
+    str = "\n\t\t\t\t   Book Id ----->";
+    animation(2, str);
+    cout << id;
+
+    str = "\n\t\t\t\t   Name of the Book ---->";
+    animation(2, str);
+    cout << name;
+
+    str = "\n\t\t\t\t   Auther of the Book ----->";
+    animation(2, str);
+    cout << Auther;
+
+    str = "\n\t\t\t\t   Publication Of The Book  ----->";
+    animation(2, str);
+    cout << publication;
+
+    str = "\n\t\t\t\t   Book Stock ----->";
+    animation(2, str);
+    cout << stock;
     cout << endl
-         << "\t\t<------------ Display Section --------->";
-    cout << endl
-         << "\t\t Id of the book -------> " << book_id;
-    cout << endl
-         << "\t\t Name of the book -------> " << book_name;
-    cout << endl
-         << "\t\t Auther of the book -------> " << auther;
-    cout << endl
-         << "\t\t Publisher of the book -------> " << publisher;
-    cout << endl
-         << "\t\t Stock of the book -------> " << stock;
+         << "\t\t\t  <------------------------------------------------------------>";
 }
 
-class function
-{   
-    private:
-    string Developer = "Developer.txt";
-    string Thankyou = "thankyou.txt";
-public:
-    void wrt();
-    void red();
-    void menu();
-    void update();
-    void search();
-    void destory();
-};
-
-void function::wrt()
+void student::animation(int speed, string temp)
 {
-    fstream file;
-    book stu;
-    file.open("database.txt", ios::app);
-    if (file.is_open())
+    int i = 0;
+    while (temp[i] != NULL)
     {
-        stu.input();
-        file.write(reinterpret_cast<char *>(&stu), sizeof(book));
-        cout << endl
-             << "\t\t File is sucessfully written ";
+        cout << temp[i];
+        i++;
+        Sleep(speed);
     }
-    else
-    {
-        cout << "\t\t File is not opened sucessfully";
-    }
-    file.close();
-    getch();
 }
+void intial();
+void input();
+void display();
+void search();
+void modify();
+void delet();
+void destory();
+void menu();
 
-void function::red()
+void intial()
 {
-    fstream file;
-    book stu;
-    file.open("database.txt", ios::in);
-    if (file.is_open())
-    {
-        if (!file.eof())
-        {
+    string Developer = "art/Developer.txt";
+    string welcome = "art/Art.txt";
 
-            while (file.read(reinterpret_cast<char *>(&stu), sizeof(book)))
-            {
-                stu.display();
-                cout << endl;
-            }
-        }
-    }
-    else
-    {
-        cout << endl
-             << "\t\t File is not opened";
-    }
-
-    file.close();
-}
-
-void function::destory()
-{
-    remove("database.txt");
-    cout << endl
-         << "\t\t<----------- Destorying database sucessfull ------->";
-}
-
-void function::search()
-{
-
-    fstream file;
-    book stu;
-    string bookname, auther, publish;
-    int id, ch, temp = 0;
-    float price;
-    file.open("database.txt", ios::in);
+    student ct;
+    // system("color 71");
+    system("color 87");
 
     system("cls");
-    cout << endl
-         << "\t\t<---------------------------------------------------->";
-    cout << endl
-         << "\t\t <---------- Search Section -------->";
-    cout << endl
-         << "\t\t <---------- 1 . Book Id -------->";
-    cout << endl
-         << "\t\t <---------- 2 . Book Name -------->";
-    cout << endl
-         << "\t\t <---------- 3 . Book Auther -------->";
-    cout << endl
-         << "\t\t <---------- 4 . Book Publisher -------->";
-    cout << endl
-         << "\t\t <---------- 5 . Book Price  -------->";
-    cout << endl
-         << "\t\t<----------------------------------------------------> ";
-    cin >> ch;
-    temp = 0;
+    ct.art(99, 2, welcome);
+    Sleep(1000);
 
-    switch (ch)
-    {
-    case 1:
-        cout << endl
-             << "\t\t <-------- Enter Id ------>";
-        cin >> id;
-        getch();
-        break;
-    case 2:
-        cout << endl
-             << "\t\t <-------- Enter Name ------>";
-        fflush(stdin);
-        getline(cin, bookname);
-
-        break;
-    case 3:
-        cout << endl
-             << "\t\t <-------- Enter Auther ------>";
-        fflush(stdin);
-        getline(cin, auther);
-
-        break;
-    case 4:
-        cout << endl
-             << "\t\t <-------- Enter Publisher ------>";
-        fflush(stdin);
-        getline(cin, publish);
-
-        break;
-
-    case 5:
-        cout << endl
-             << "\t\t <-------- Enter Price ------>";
-        cin >> price;
-
-        break;
-    default:
-        cout << endl
-             << "\t\t <------ Invalid options ------>";
-        break;
-    }
-
-    if (file.is_open())
-    {
-        if (!file.eof())
-        {
-            while (file.read(reinterpret_cast<char *>(&stu), sizeof(book)))
-            {
-
-                switch (ch)
-                {
-                case 1: // id
-                    if (stu.retid() == id)
-                    {
-                        stu.display();
-                        temp++;
-                    }
-                    break;
-                case 2: // name
-                    if (stu.retname() == bookname)
-                    {
-
-                        stu.display();
-                        temp++;
-                    }
-                    break;
-
-                case 3: // auther
-                    if (stu.retauther() == auther)
-                    {
-
-                        stu.display();
-                        temp++;
-                    }
-                    break;
-                case 4: // publisher
-                    if (stu.retpublisher() == publish)
-                    {
-
-                        stu.display();
-                        temp++;
-                    }
-                    break;
-                case 5: // price
-                    if (stu.retprice() == price)
-                    {
-                        stu.display();
-                        temp++;
-                    }
-                    break;
-                default:
-                    cout << endl
-                         << "\t\t Invalid type:";
-                    break;
-                }
-            }
-            getch();
-        }
-    }
-    else
-    {
-        cout << endl
-             << "\t\t <---------- File is not opened -------->";
-    }
-
-    if (temp == 0)
-        cout << endl
-             << "\t\t <----- Record not found ------->";
-
-    file.close();
+    system("cls");
+    ct.art(1, 0, Developer);
+    Sleep(4000);
 }
 
-void function::update()
+void menu()
 {
-    fstream file;
-    book stu;
-    int id, n = 0;
-    char ch;
-    file.open("database.txt", ios::in | ios::out);
-    if (file.is_open())
-    {
-        if (!file.eof())
-        {
-            while (file.read(reinterpret_cast<char *>(&stu), sizeof(book)))
-            {
-                cout << endl
-                     << "\t\t<------- Enter the id ----->";
-                cin >> id;
-                if (stu.retid() == id)
-                {
-                    stu.display();
-                    cout << endl
-                         << "\t\t Press y for to modify";
-                    cin >> ch;
-                    if (ch == 'y' || ch == 'y')
-                    {
-                        stu.input();
+    int num;
+    string name, add;
+    int type;
+    int roll, clas;
+    long long int fone;
+    student stu;
+    string Thankyou = "art/thankyou.txt";
+    string banner = "art/banner.txt";
+    string Developer = "art/Developer.txt";
 
-                        int pos = (-1) * static_cast<int>(sizeof(book)); // file pointer
-                        file.seekp(pos, ios::cur);
-                        file.write(reinterpret_cast<char *>(&stu), sizeof(book));
-                        cout << "\t\t Sucessfully modified";
-                    }
-                }
-            }
-        }
-        else
-        {
-            cout << endl
-                 << "\t\t File is not opened";
-        }
-
-        if (n == 0)
-        {
-            cout << endl
-                 << "\t\t Name is not found";
-        }
-
-        file.close();
-        getch();
-    }
-}
-void function ::menu()
-{   book bok;
-    int ch;
-
+    int choice;
     do
     {
         system("cls");
+        stu.art(2, 1, banner);
+        str = "\n\t\t\t  <-----------  WELCOME TO MAIN MENU  ------------>";
+        stu.animation(2, str);
         cout << endl
-             << "\t\t<---------------------------------------------------->";
-        cout << endl
-             << "\t\t <---------- 1 . Input -------->";
-        //            cout << endl
-        //                 << "\t\t <---------- 2 . Update -------->";
-        //            cout << endl
-        //                 << "\t\t <---------- 3 . Search -------->";
-        cout << endl
-             << "\t\t <---------- 4 . Display -------->";
-        cout << endl
-             << "\t\t <---------- 5 . Destory -------->";
-        cout << endl
-             << "\t\t <---------- 10 . About Developers -------->";
-        cout << endl
-             << "\t\t <---------- 99. Exit -------->";
-        cout << endl
-             << "\t\t<----------------------------------------------------> ";
-        cin >> ch;
+             << "\t\t\t <---------------------------------------------------->";
 
-        switch (ch)
+        str = "\n\t\t\t <------ Please select appropriate key ------>";
+        stu.animation(2, str);
+
+        cout << endl
+             << "\t\t\t\t 1  . Input";
+        cout << endl
+             << "\t\t\t\t 2  . Display";
+        cout << endl
+             << "\t\t\t\t 3  . Destory data base";
+        cout << endl
+             << "\t\t\t\t 4  . Modify";
+        cout << endl
+             << "\t\t\t\t 5  . Search";
+        cout << endl
+             << "\t\t\t\t 6  . Delete";
+        cout << endl
+             << "\t\t\t\t 10 . About";
+        cout << endl
+             << "\t\t\t\t 99 . Exit" << endl;
+        cout << "\t\t\t <---------------------------------------------------->";
+        cin >> choice;
+        switch (choice)
         {
         case 1:
-            wrt();
-            break;
+            system("cls");
+            stu.art(1, 0, banner);
 
+            str = "\n\t\t\t  <-----------  WELCOME TO INPUT SECTION ------------>";
+            stu.animation(2, str);
+            input();
+            break;
         case 2:
-            //    update();
+            system("cls");
+            stu.art(1, 0, banner);
+
+            str = "\n\t\t\t  <-----------  WELCOME TO DISPLAY SECTION ------------>";
+            stu.animation(2, str);
+            display();
+            break;
+        case 3:
+            system("cls");
+            stu.art(1, 0, banner);
+            destory();
+            break;
+        case 4: // modify
+            system("cls");
+            stu.art(1, 0, banner);
+            modify();
             break;
 
-        case 3:
+        case 5: // search
+            system("cls");
+            stu.art(1, 0, banner);
             search();
             break;
-        case 4:
-            red();
-            getch();
+
+        case 6: // delete
+            system("cls");
+            stu.art(1, 0, banner);
+            delet();
             break;
-        case 5:
-            destory();
-            getch();
+        case 10:
+            stu.about();
             break;
         case 99:
             system("cls");
-            bok.art(99,1,Thankyou);
-            system("exit");
-            break;
-        case 10:
-            system("cls");
-            bok.art(99,2,Developer);
-            getch();
+            stu.art(99, 1, Thankyou);
             break;
         default:
-            cout << endl
-                 << "\t\t <------ INVALID OPTIONS --------> ";
+            str = "\n\t\t\t <------ Invalid Options ----->";
+            stu.animation(2, str);
             break;
         }
 
-    } while (ch != 99);
+    } while (choice != 99);
 }
 
 int main()
 {
+    intial();
+    menu();
+}
 
-    function fun;
-    book bok;
-    string Developer = "Developer.txt";
-    string welcome = "Art.txt";
-    system("color 2f");
-    system("cls");
-    bok.art(99, 2, welcome);
-    Sleep(1000);
-    bok.art(1,0,Developer);
+void delet()
+{
+    int flag = 99;
+    student hack, stu;
+    fstream file, outfile;
+    char ch;
+    int id;
+    str = "\n\t\t\t  <-----------  WELCOME TO DELETE SECTION  ------------>";
+    stu.animation(2, str);
+
+    file.open("database.txt", ios::in | ios::binary);
+    outfile.open("temp.txt", ios::out | ios::binary);
+    str = "\n\t\t\t\t Enter Id Of The Bok  ----->";
+    stu.animation(2, str);
+    cin >> id;
+
+    if (file.is_open())
+    {
+        while (file.read(reinterpret_cast<char *>(&hack), sizeof(student)))
+        {
+            if (hack.retid() != id)
+            {
+                outfile.write(reinterpret_cast<char *>(&hack), sizeof(student));
+            }
+            if (hack.retid() == id)
+                flag = 100;
+        }
+        file.close();
+        outfile.close();
+    }
+    else
+    {
+        str = "\n\t\t\t\t <------ File Is Not Found ----->";
+        stu.animation(2, str);
+    }
+
+    outfile.close();
+
+
+    if (flag == 99)
+    {
+        str = "\n\t\t\t\t <------ Not Found ----->";
+        stu.animation(2, str);
+    }
+    else if (flag == 100)
+    {
+        str = "\n\t\t\t\t <------ Sucessfull Delete ------>";
+        stu.animation(2, str);
+        remove("database.txt");
+        rename("temp.txt", "database.txt");
+    }
+
+    else
+    {
+        str = "\n\t\t\t\t <------ Founded But Not Delete ----->";
+        stu.animation(2, str);
+    }
+    cout << endl
+         << "\t\t\t <---------------------------------------------------->";
     getch();
-    
-    fun.menu();
-    return 0;
+}
+
+void search()
+{
+    int num, n, ch;
+    fstream file;
+    student stu;
+    str = "\n\t\t\t  <-----------  WELCOME TO SEARCH SECTION  ------------>";
+    stu.animation(2, str);
+    str = "\n\t\t\t\t Enter Id Of The BOOK ----->";
+    stu.animation(2, str);
+    cin >> ch;
+    file.open("database.txt", ios::in | ios::binary);
+    if (file.is_open())
+    {
+        if (!file.eof())
+        {
+            while (file.read(reinterpret_cast<char *>(&stu), sizeof(student)))
+            {
+                if (stu.retid() == ch)
+                {
+                    str = "\n\t\t\t\t <------ Sucessfully Founded ----->";
+                    stu.animation(2, str);
+                    stu.display();
+                    n++;
+                }
+            }
+            // getch();
+        }
+    }
+    else
+    {
+        str = "\n\t\t\t\t <------ File Is Not Found ----->";
+        stu.animation(2, str);
+    }
+
+    if (n == 0)
+    {
+        str = "\n\t\t\t\t <------ Data Is Not Found ----->";
+        stu.animation(2, str);
+        // getch();
+    }
+    file.close();
+    cout << endl
+         << "\t\t\t  <------------------------------------------------------------>";
+    getch();
+}
+
+void modify()
+{
+    int num, n, cha;
+    fstream file;
+    student stu;
+    char ch;
+    str = "\n\t\t\t  <-----------  WELCOME TO MODIFY SECTION ----------->";
+    stu.animation(2, str);
+    file.open("database.txt", ios::in | ios::out | ios::binary);
+    cout << endl
+         << "\t\t\t\t Enter the id of the book -----> ";
+    cin >> cha;
+    if (file.is_open())
+    {
+        if (!file.eof())
+        {
+            while (file.read(reinterpret_cast<char *>(&stu), sizeof(student)))
+            {
+                if (stu.retid() == cha)
+                {
+                    str = "\n\t\t\t\t <------ Sucessfully Founed  ----->";
+                    stu.animation(2, str);
+                    cout << endl
+                         << "\t\t\t   <----- Displaying current information ----->";
+                    stu.display();
+                    str = "\n\t\t\t\t <-- Press y For To Modify -->";
+                    stu.animation(2, str);
+                    fflush(stdin);
+                    ch = getch();
+                    if (ch == 'y' || ch == 'y')
+                    {
+                        stu.input();
+                        int pos = (-1) * static_cast<int>(sizeof(student)); // file pointer
+                        file.seekp(pos, ios::cur);
+                        file.write(reinterpret_cast<char *>(&stu), sizeof(student));
+                        str = "\n\t\t\t\t <------ Sucessfully Modified ----->";
+                        stu.animation(2, str);
+                    }
+                    n++;
+                }
+            }
+        }
+    }
+    else
+    {
+        str = "\n\t\t\t\t <------ File Is Not Found ----->";
+        stu.animation(2, str);
+    }
+
+    if (n == 0)
+    {
+        str = "\n\t\t\t\t <------ Data Is Not Found ----->";
+        stu.animation(2, str);
+    }
+
+    file.close();
+    cout << endl
+         << "\t\t\t  <------------------------------------------------------------>";
+    getch();
+}
+
+void input()
+{
+    fstream file;
+    student stu;
+    file.open("database.txt", ios::app);
+
+    if (file.is_open())
+    {
+        stu.input();
+        file.write(reinterpret_cast<char *>(&stu), sizeof(student));
+        str = "\n\t\t\t\t <------ File Is Written Sucessfully  ----->";
+        stu.animation(2, str);
+    }
+    else
+    {
+        str = "\n\t\t\t\t <------ File Is Not Found ----->";
+        stu.animation(2, str);
+    }
+    file.close();
+    cout << endl
+         << "\t\t\t  <------------------------------------------------------------>";
+    getch();
+}
+
+void display()
+{
+    fstream file;
+    student stu;
+    file.open("database.txt", ios::in);
+    if (file.is_open())
+    {
+        if (!file.eof())
+        {
+            while (file.read(reinterpret_cast<char *>(&stu), sizeof(student)))
+            {
+                stu.display();
+            }
+        }
+    }
+    else
+    {
+        str = "\n\t\t\t\t <------ File Is Not Found ----->";
+        stu.animation(2, str);
+    }
+    file.close();
+    cout << endl
+         << "\t\t\t  <------------------------------------------------------------>";
+    getch();
+}
+
+void destory()
+{
+    student stu;
+    remove("database.txt");
+
+    str = "\n\t\t   <---------  Destorying Database Sucessfully --------->";
+    stu.animation(2, str);
+    cout << endl
+         << "\t\t\t <---------------------------------------------------->";
+    getch();
 }
